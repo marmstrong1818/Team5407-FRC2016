@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 	// RobotDrive myRobot;
-	Joystick joy_RightDriveStick;
+	// Joystick joy_RightDriveStick;
+	//Joystick joy_LeftWeaponsStick; 
 	int autoLoopCounter;
 	RobotBase robotbase; 
 	Inputs inputs; 
@@ -29,7 +30,8 @@ public class Robot extends IterativeRobot {
     	//joy_RightDriveStick = new Joystick(0);
     	
     	robotbase = new RobotBase(0,1);
-    	inputs = new Inputs(0); 
+    	inputs = new Inputs(0);   
+    	
     	
     }
     
@@ -65,7 +67,16 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         // myRobot.arcadeDrive(joy_RightDriveStick);
         inputs.readValues();
+        robotbase.update();
+        robotThink();
+     
     }
+    
+    public void robotThink() {
+    	robotbase.d_LeftDrivePower = inputs.d_PowerArcadeDrive - inputs.d_TurnArcadeDrive;
+    	robotbase.d_RightDrivePower = inputs.d_PowerArcadeDrive + inputs.d_TurnArcadeDrive;
+    }
+    
     
     /**
      *

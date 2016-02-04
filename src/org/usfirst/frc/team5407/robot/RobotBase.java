@@ -7,6 +7,9 @@ public class RobotBase {
 	Talon mot_LeftDriveMotor;
 	Talon mot_RightDriveMotor; 
 	
+	double d_LeftDrivePower;
+	double d_RightDrivePower; 
+	
 	   /**
      * This function is run when this class is first created used for any initialization code.
      */
@@ -26,7 +29,16 @@ public class RobotBase {
     }
 	
 	
-	
+    public void update(){
+
+    	/* Motors on one side are flipped over (inverted) so that if we apply the + power the robot goes in what you consider forward.  
+    	 * In the case below we flip the Right. If it turns out that your robot is going backwards then you
+    	 * would remove * -1 from right and put it on left. Just negating  as in -d_LeftFrontDrivePower does the same thing.      
+    	 */
+    	mot_LeftDriveMotor.set(d_LeftDrivePower);
+    	mot_RightDriveMotor.set(d_RightDrivePower*-1.0);
+
+    }
 	
 	
 	

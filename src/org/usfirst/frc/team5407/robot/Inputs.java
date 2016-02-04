@@ -5,17 +5,20 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Inputs {
 	
 	Joystick joy_RightDriveStick; 
+	//Joystick joy_LeftWeaponsStick; 
 	
 	double d_TurnArcadeDrive;
 	double d_PowerArcadeDrive; 
 	
+
 	
 	
-	
-	public Inputs( int USBConnector_RightDriveStick){
+	public Inputs( int USBConnector_RightDriveStick /*, int USBConnector_joy_LeftWeaponsStick*/){
 		
 		joy_RightDriveStick = new Joystick(USBConnector_RightDriveStick); 
 		zeroInputs();
+		//joy_LeftWeaponsStick = new Joystick(USBConnector_joy_LeftWeaponsStick); 
+		
 		
 	}
 	public void readValues() {
