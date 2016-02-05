@@ -19,6 +19,7 @@ public class Robot extends IterativeRobot {
 	int autoLoopCounter;
 	RobotBase robotbase; 
 	Inputs inputs; 
+	Shooter shooter; 
 	
 	
     /**
@@ -30,7 +31,7 @@ public class Robot extends IterativeRobot {
     	//joy_RightDriveStick = new Joystick(0);
     	
     	robotbase = new RobotBase(0,1);
-    	inputs = new Inputs(0);   
+    	inputs = new Inputs(0,1);   
     	
     	
     }
@@ -68,6 +69,7 @@ public class Robot extends IterativeRobot {
         // myRobot.arcadeDrive(joy_RightDriveStick);
         inputs.readValues();
         robotbase.update();
+        shooter.update(inputs); 
         robotThink();
      
     }
