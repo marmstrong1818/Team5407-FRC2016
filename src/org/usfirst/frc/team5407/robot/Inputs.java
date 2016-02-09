@@ -12,7 +12,7 @@ public class Inputs {
 	double d_ShooterPower; 
 	
 	
-	boolean b_ShooterButton; 
+	boolean b_ShooterHold; 
 
 	
 	//This is where declare all the joysticks and buttons   
@@ -28,8 +28,8 @@ public class Inputs {
 		
 		 d_TurnArcadeDrive = joy_RightDriveStick.getX() * -1 * .50;
 		 d_PowerArcadeDrive = joy_RightDriveStick.getY() * -1;
-		 d_ShooterPower = joy_LeftWeaponsStick.getZ(); 
-		 b_ShooterButton = joy_LeftWeaponsStick.getRawButton(6); 
+		 d_ShooterPower = joy_LeftWeaponsStick.getZ() * -1; 
+		 b_ShooterHold = joy_LeftWeaponsStick.getRawButton(6); 
 		
 	}
 		//When joysticks or buttons are at zero. Motors will be set to zero power. 

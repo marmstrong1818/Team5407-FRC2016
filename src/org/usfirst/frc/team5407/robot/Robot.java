@@ -31,7 +31,10 @@ public class Robot extends IterativeRobot {
     	//joy_RightDriveStick = new Joystick(0);
     	
     	robotbase = new RobotBase(0,1);
-    	inputs = new Inputs(0,1);   
+    	inputs = new Inputs(0,   //USB Joystick Driver  
+    						1	 //USB Joystick Shooter 
+    						);  
+    	shooter = new Shooter(2); //Shooter Motor 
     	
     	
     }
