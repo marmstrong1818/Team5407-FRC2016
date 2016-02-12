@@ -1,8 +1,6 @@
 package org.usfirst.frc.team5407.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -72,7 +70,7 @@ public class Robot extends IterativeRobot {
         // myRobot.arcadeDrive(joy_RightDriveStick);
         inputs.readValues();
         robotbase.update();
-        shooter.update(inputs); 
+        shooter.update(); 
         robotThink();
      
     }
@@ -80,6 +78,7 @@ public class Robot extends IterativeRobot {
     public void robotThink() {
     	robotbase.d_LeftDrivePower = inputs.d_PowerArcadeDrive - inputs.d_TurnArcadeDrive;
     	robotbase.d_RightDrivePower = inputs.d_PowerArcadeDrive + inputs.d_TurnArcadeDrive;
+    	shooter.d_ShooterPower = inputs.d_ShooterPower;
     }
     
     
