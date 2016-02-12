@@ -1,8 +1,6 @@
 package org.usfirst.frc.team5407.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -13,17 +11,30 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	RobotDrive myRobot;
-	Joystick stick;
+	// RobotDrive myRobot;
+	// Joystick joy_RightDriveStick;
+	//Joystick joy_LeftWeaponsStick; 
 	int autoLoopCounter;
+	RobotBase robotbase; 
+	Inputs inputs; 
+	Shooter shooter; 
+	
 	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	myRobot = new RobotDrive(0,1);
-    	stick = new Joystick(0);
+    	// myRobot = new RobotDrive(0,1);
+    	//joy_RightDriveStick = new Joystick(0);
+    	
+    	robotbase = new RobotBase(0,1);
+    	inputs = new Inputs(0,   //USB Joystick Driver  
+    						1	 //USB Joystick Shooter 
+    						);  
+    	shooter = new Shooter(2); //Shooter Motor 
+    	
+    	
     }
     
     /**
@@ -39,10 +50,10 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
     	if(autoLoopCounter < 100) //Check if we've completed 100 loops (approximately 2 seconds)
 		{
-			myRobot.drive(-0.5, 0.0); 	// drive forwards half speed
+			// myRobot.drive(-0.5, 0.0); 	// drive forwards half speed
 			autoLoopCounter++;
 			} else {
-			myRobot.drive(0.0, 0.0); 	// stop robot
+			// myRobot.drive(0.0, 0.0); 	// stop robot
 		}
     }
     
@@ -56,10 +67,23 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        myRobot.arcadeDrive(stick);
+        // myRobot.arcadeDrive(joy_RightDriveStick);
+        inputs.readValues();
+        robotbase.update();
+        shooter.update(); 
+        robotThink();
+     
     }
     
+    public void robotThink() {
+    	robotbase.d_LeftDrivePower = inputs.d_PowerArcadeDrive - inputs.d_TurnArcadeDrive;
+    	robotbase.d_RightDrivePower = inputs.d_PowerArcadeDrive + inputs.d_TurnArcadeDrive;
+    	shooter.d_ShooterPower = inputs.d_ShooterPower;
+    }
+    
+    
     /**
+     *
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
